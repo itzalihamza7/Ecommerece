@@ -1,0 +1,19 @@
+
+<h2>Details for Order <%= @order.id %> by <%=@order.user.name%></h2>
+<% if @orderproducts.present? %>
+  <table class="table">
+    <tr>
+    <th scope="col">Product Name</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Price</th>
+    <th scope="col">Total</th>
+    </tr>
+    <% @orderproducts.each do |orderproduct| %>
+      <tr scope="row">
+      <td><%= order_product_price(orderproduct) %></td>
+      <td><%= order_product_quantity(orderproduct) %></td>
+      <td><%= order_product_price(orderproduct) %>$</td>
+      <td><%= order_product_total(orderproduct) %>$</td>
+      </tr>
+    <% end %>
+<% end %>

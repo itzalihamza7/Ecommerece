@@ -1,0 +1,5 @@
+$("#edit-btn-<%=@comment.id%>").show();
+$("#edit-form-<%=@comment.id%>").addClass("d-none");
+$("#comment-body-<%=@comment.id%>").show();
+$("#comment-body-<%=@comment.id%>").load(location.href + " #comment-body-<%=@comment.id%>");
+

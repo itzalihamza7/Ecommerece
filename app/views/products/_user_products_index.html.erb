@@ -1,0 +1,25 @@
+<div class="ml-5 pl-5">
+	<% products.each do |product|%>
+		<%= link_to edit_product_path(product), class: 'text-decoration-none' do %>
+		<div class="card mb-3 post-card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-3">
+						<% if product.header_image.attached? %>
+						<%= image_tag product.header_image, class: 'header-img' %>
+						<% end %>
+					</div>
+					<div class="col-md-8">
+						<h5 class="card-title mb-2 text-dark"><%= product.title %></h5>
+						Serial Number: <%= product.serial_number %>
+						<p class="text-secondary mb-0"><%= product.description %></p>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<%= link_to 'Delete', product_path(product), method: :delete, class: 'btn btn-danger mt-3 ml-5 mb-3', data: { confirm: "Are you sure?" } %>
+			</div>
+		</div>
+		<% end %>
+	<% end %>
+</div>

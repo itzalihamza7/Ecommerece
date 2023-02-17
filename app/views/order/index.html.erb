@@ -1,0 +1,20 @@
+<h1>Your Orders</h1>
+<% if @orders.empty? %>
+  <p>You have no orders.</p>
+<% else %>
+  <table class="table">
+    <tr>
+    <th scope="col">Order ID</th>
+    <th scope="col">Order Creation Date</th>
+    <th scope="col">Order Total Amount</th>
+    </tr>
+    <% @orders.each do |order| %>
+      <tr scope="row">
+      <td><%= link_to order.id, order %></td>
+      <td><%= order.created_at %></td>
+      <td><%= order.total_amount/100 %>$</td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+

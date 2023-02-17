@@ -1,0 +1,6 @@
+$("#comment-form").val('');
+$("#comment-pane").prepend("<%= j render 'comments/comment',product: @set_product,comment: @comment %>") <% unless @comment.nil? %>
+
+
+
+

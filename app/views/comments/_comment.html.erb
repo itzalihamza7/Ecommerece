@@ -1,0 +1,32 @@
+<div class="comment-<%= comment.id %> container mb-5"
+    style="border: 1px solid black; padding: 1em; margin: 1em;">
+  <strong><%= comment.user.name %></strong><br />
+  <% if (comment.updated_at - comment.created_at) > 1 %>
+    <small>Edited <%= time_ago_in_words(comment.updated_at) %> ago</small>
+  <% else %>
+    <small>Created <%= time_ago_in_words(comment.created_at) %> ago</small>
+  <% end %>
+
+  <% if current_user == product.user or current_user == comment.user %>
+    <div  class="btn-group float-right">
+      <% if current_user == comment.user %>
+        <div id="edit-btn-<%=comment.id%>">
+          <%= link_to "Edit",edit_product_comment_path(product,comment) , remote: true, class:"btn btn-warning",id: "edit-button-#{comment.id}" %>
+        </div>
+      <% end %>
+
+      <%= button_to "Delete", [product, comment],remote: true, class:"ml-2 btn btn-danger", method: :delete ,data: { confirm: "Are you sure you want to remove this comment?" }%>
+    </div>
+
+    <div id="edit-form-<%=comment.id%>" class="d-none pb-5 mb-5 ">
+      <%= render 'comments/form',
+        product: product,
+        comment: comment,
+        submit_label: "Update"%>
+    </div>
+  <% end %>
+
+  <div id="comment-body-<%=comment.id%>">
+    <%= comment.body %>
+  </div>
+</div>

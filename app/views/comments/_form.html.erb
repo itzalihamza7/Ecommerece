@@ -1,0 +1,6 @@
+<div id="comment-form">
+    <%= form_with(model: [product, comment], remote: true, validate: true)  do |f| %>
+        <%= f.text_area :body, class: "form-control"  %>
+        <%= f.submit submit_label,class: "btn btn-primary  mt-1" %>
+    <% end %>
+</div>

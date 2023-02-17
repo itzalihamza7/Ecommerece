@@ -1,0 +1,16 @@
+<% cart.each do |product| %>
+  <%= render partial: 'cart/cart_product', locals: {product: product} %>
+<% end %>
+<% if cart.empty? %>
+    <h2> Your cart is empty </h2>
+  <% else %>
+
+  <% cart_to_json(cart) %>
+  Total Ammount: <%= cart_total(cart) %>$
+  <% if user_signed_in? %>
+    <%= button_to "Checkout", checkout_cart_checkout_index_path(cart),method: :post,remote: true,data: {disable_with: "Processing"}, class: 'btn btn-primary mt-auto mb-2', style: 'width:100%' %>
+  <% else %>
+    <%= button_to "Checkout", new_user_session_path,method: :get ,data: {disable_with: "Processing"}, class: 'btn btn-primary mt-auto mb-2', style: 'width:100%' %>
+  <% end %>
+<% end %>
+

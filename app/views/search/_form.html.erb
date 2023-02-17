@@ -1,0 +1,9 @@
+<%= search_form_for(@query, url: search_index_path, method: :get) do |f| %>
+  <%= f.search_field :title_or_description_i_cont, placeholder: "Search..." ,class: "form-control me-2 "%>
+  <%= f.submit "Search!"  ,class: "btn btn-outline-success mt-1"%>
+<%end%>
+
+
+
+
+

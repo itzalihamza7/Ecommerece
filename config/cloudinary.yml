@@ -1,0 +1,17 @@
+development:
+  cloud_name: "dmyncwhbr"
+  api_key: "145352875784844"
+  api_secret: "u-wfbrolx7o-HjYh2ngXHQhpSM0"
+  secure: true
+
+production:
+  cloud_name: "dmyncwhbr"
+  api_key: "145352875784844"
+  api_secret: "u-wfbrolx7o-HjYh2ngXHQhpSM0"
+  secure: true
+
+test:
+  cloud_name: "dmyncwhbr"
+  api_key: "145352875784844"
+  api_secret: "u-wfbrolx7o-HjYh2ngXHQhpSM0"
+  secure: true

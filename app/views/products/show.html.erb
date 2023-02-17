@@ -1,0 +1,46 @@
+<div style='padding-left: 190px;'>
+  <% if @set_product.description_images.present? %>
+    <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <%=render partial: 'couresel_images' ,locals: {product: @set_product}%>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  <% end %>
+
+  <div style="padding-left:10px; margin-top:40px">
+    <%= image_tag(@set_product.header_image,style: 'margin-right:2% ; width: 20%; float:right;')  if @set_product.header_image.attached?%>
+    <h1 class="card-title mb-2"><%= @set_product.title %></h1>
+    <h3 class="card-title mb-3">Owner: <%= @set_product.user.name %></h3>
+    <p class="card-text mb-4">Description: <%= @set_product.description %></p>
+    <p class="card-text mb-4">Price: <%= @set_product.price %></p>
+    <p class="card-text mb-4">Available Quantity: <%= @set_product.quantity %></p>
+
+    <% if valid_checkout_user(@set_product)  %>
+      <% if user_signed_in? %>
+        <%= button_to "Buy Now", buy_now_checkout_index_path,params: {id: @set_product.id},remote: true ,data: {disable_with: "Processing"},class: 'btn btn-primary mt-auto mb-2', style: 'width:100%' %>
+      <% else %>
+        <%= button_to "Buy Now", buy_now_checkout_index_path,params: {id: @set_product.id},data: {disable_with: "Processing"},class: 'btn btn-primary mt-auto mb-2', style: 'width:100%' %>
+      <% end %>
+      <% if session[:cart].exclude?(@set_product.id) %>
+        <%= button_to "Add to Cart", cart_index_path,params: {id: @set_product.id} ,remote: true ,data: {disable_with: "Adding to Cart"},class: 'btn btn-primary mt-auto mb-2' ,style: 'width:100%' %>
+      <% else %>
+        <%= button_to "Remove from Cart", cart_path(@set_product.id),method: :delete,remote: true,data: {disable_with: "Removing from Cart"},class: 'btn btn-primary mt-auto mb-2' ,style: 'width:100%' %>
+      <% end %>
+    <% end %>
+    </div>
+
+  <div class="container" >
+    <%= render partial: 'comments/comment_pane', locals: {comments: @comments ,product: @set_product} %>
+    <% if user_signed_in? %>
+    <%= render 'comments/form',product: @set_product,comment: @set_product.comments.new,submit_label: "Reply" %>
+    <% end %>
+  </div>
+</div>

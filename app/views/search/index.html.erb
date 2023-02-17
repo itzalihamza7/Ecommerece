@@ -1,0 +1,4 @@
+<h2>Search</h2>
+<%= render 'form' %>
+<h1 class="text-center"><%= pluralize(@products.count, "Result") %></h1>
+<%= render partial: 'shared/home_page' ,locals: {products: @products} %>

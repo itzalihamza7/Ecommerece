@@ -1,0 +1,6 @@
+<h4 class='d-flex justify-content-between mb-4 ml-5 pl-5'>
+  <span>All your Products</span>
+  <%= link_to 'Add New Product', new_product_path, class: 'btn btn-primary' %>
+</h4>
+
+<%=render partial: 'user_products_index' ,locals: {products: @products}%>
