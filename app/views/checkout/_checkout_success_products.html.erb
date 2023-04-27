@@ -1,0 +1,12 @@
+<% session.line_items.data.each do |line_item| %>
+  <% product = find_product_by_stripe_price(line_item) %>
+ <div class="mt-1 mb-3">
+  <p>
+    <span style="font-size: 30px;"><%= product.title %> </span>
+    <br>
+    quantity: <%= line_item.quantity %>
+    <br>
+    price:    <%= line_item.price.unit_amount/100 %>$
+  </p>
+  </div>
+<% end %>

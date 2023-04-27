@@ -1,0 +1,5 @@
+<% product.description_images.each do |image| %>
+  <div class="carousel-item <%= couresal_first_image(image,product) %>",>
+    <%= image_tag(image, class: 'd-block w-100',style: 'height: 50vh;') %>
+  </div>
+<% end %>

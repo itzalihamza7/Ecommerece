@@ -1,0 +1,16 @@
+<h1 class="mb-5">Welcome</h1>
+<div class="wrapper">
+    <div class="profile" style="background-image: url(<%= rails_blob_url(current_user.avatar) %>)">
+        <div class="overlay">
+            <div class="about d-flex flex-column">
+                <h4><%= current_user.name %></h4>
+            </div>
+            <ul class="social-icons">
+                <li><i class="fa fa-facebook"></i></li>
+                <li><i class="fa fa-linkedin"></i></li>
+                <li><i class="fa fa-twitter"></i></li>
+                <li><i class="fa fa-instagram"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>

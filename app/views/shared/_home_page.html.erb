@@ -1,0 +1,36 @@
+<div class="row">
+	<% products.each do |product| %>
+    <div class="col-md-6 col-lg-4 mb-5 ">
+      <div class="card post-card">
+        <div class="header-image">
+          <%= image_tag product.header_image, style: 'margin-left:18% ; width:60%;' if(product.header_image.attached?) %>
+        </div>
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><%= product.title %></h5>
+          <h6 class="text-secondary float-right">
+            Seller:<%= product.user.name %>
+            <br>
+            Price:<%= product.price/100 %>$
+          </h6>
+          <p class="card-text">
+            <%= truncate(product.description, length: 100) %>
+          </p>
+          <%= link_to "Product Details", product_path(product) ,class: 'btn btn-primary mt-auto mb-2' %>
+
+          <% if valid_checkout_user(product)  %>
+            <% if user_signed_in? %>
+              <%= button_to "Buy Now", buy_now_checkout_index_path,params: {id: product.id},remote: true ,data: {disable_with: "Processing"},class: 'btn btn-primary mt-auto mb-2', style: 'width:100%' %>
+            <% else %>
+              <%= button_to "Buy Now", buy_now_checkout_index_path,params: {id: product.id},data: {disable_with: "Processing"},class: 'btn btn-primary mt-auto mb-2', style: 'width:100%' %>
+            <% end %>
+            <% if session[:cart].exclude?(product.id) %>
+              <%= button_to "Add to Cart", cart_index_path,params: {id: product.id} ,remote: true ,data: {disable_with: "Adding to Cart"},class: 'btn btn-primary mt-auto mb-2' ,style: 'width:100%' %>
+            <% else %>
+              <%= button_to "Remove from Cart", cart_path(product.id),method: :delete,remote: true,data: {disable_with: "Removing from Cart"},class: 'btn btn-primary mt-auto mb-2' ,style: 'width:100%' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+	<% end %>
+</div>

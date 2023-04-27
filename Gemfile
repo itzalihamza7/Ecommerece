@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'rack-cors' # for cross origin resource sharing
+
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
 
@@ -67,9 +67,9 @@ end
 
 group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
-  #gem 'chromedriver-helper'
+  gem 'chromedriver-helper'
   # Adds support for Capybara system testing and selenium driver
-  #gem 'selenium-webdriver'
+  gem 'selenium-webdriver'
 end
 
 gem 'active_model_serializers'

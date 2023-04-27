@@ -1,0 +1,7 @@
+<h1> Success </h1>
+<%= render partial: 'checkout/checkout_success_products' , locals: { session: @session_with_product } %>
+<br>
+<br>
+Checkout Status: <%=@session_with_product.payment_status%>
+<br>
+Amount Paid: <%= @session_with_product.amount_total/100 %>$

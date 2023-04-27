@@ -1,0 +1,28 @@
+<div class="card mb-3 post-card">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-2">
+				<% if product.header_image.attached? %>
+				<%= image_tag product.header_image, class: 'header-img' ,style: 'width:50%; height:auto;'%>
+				<% end %>
+			</div>
+			<div class="col-md-8">
+				<h5 class="card-title mb-2 text-dark"><%= product.title %></h5>
+						Seller: <%= product.user.name %>
+				<br>
+						Price:<%= price(product) %>$
+				<p class="text-secondary mb-0"><%= product.description %></p>
+			</div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<%= link_to 'Delete', cart_path(product), method: :delete, class: 'btn btn-danger mt-3 ml-5 mb-3', data: { confirm: "Are you sure you want to remove this product from cart?" } %>
+		<div style="float: right;">
+		<%= form_with(url: cart_url(product), method: :patch) do |f| %>
+		<%= f.label :quantity, "Quantity" %>
+		<%= f.select :quantity ,(1..product.quantity), {selected: session[:quantity][product.id]}, :onchange => "this.form.submit()" , class: 'form-control' %>
+		<% end %>
+		</div>
+	</div>
+</div>
+

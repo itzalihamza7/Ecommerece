@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand">Ecommerece</a>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+ 				<%= link_to "Home", root_path,  class:'nav-link'%>
+			</li>
+    	<% if user_signed_in? %>
+				<li class="nav-item">
+					<%= link_to "My Profile",users_path(id: current_user.id),  class:'nav-link'%>
+				</li>
+
+				<% if current_user.Customer?  %>
+				<li class="nav-item">
+					<%= link_to "Cart" , cart_index_path, class:'nav-link'%>
+				</li>
+
+				<li class="nav-item">
+					<%= link_to "Orders" , order_index_path, class:'nav-link'%>
+				</li>
+
+				<li class="nav-item">
+					<%= link_to "Switch to Seller", update_role_users_path(id: current_user.id , role: "Seller"), method: :patch, validate: false , class:'nav-link'%>
+				</li>
+
+				<% elsif current_user.Seller?   %>
+				<li class="nav-item">
+					<%= link_to "My Products" ,products_path,  class:'nav-link'%>
+				</li>
+
+				<li class="nav-item">
+					<%= link_to "Switch to Customer", update_role_users_path(id: current_user.id , role: "Customer"), method: :patch, validate: false , class:'nav-link'%>
+				</li>
+
+				<% elsif current_user.Admin? %>
+				<li class="nav-item">
+					<%= link_to "Dashboard" ,rails_admin_path,  class:'nav-link'%>
+				</li>
+				<% end %>
+			<% else %>
+			<li class="nav-item">
+					<%= link_to "Sign In", new_user_session_path, class:'nav-link'%>
+				</li>
+
+				<li class="nav-item">
+					<%= link_to "Sign Up", new_user_registration_path, class:'nav-link'%>
+				</li>
+			<% end %>
+		</ul>
+		<ul class="navbar-nav">
+    	<% if user_signed_in? %>
+				<li class="nav-item pt-2">
+				<%= search_form_for(@query, url: search_index_path, method: :get) do |f| %>
+				<%= f.search_field :title_or_description_i_cont, placeholder: "Search Products..." ,class: "form-control me-2" ,:onchange => "this.form.submit()"%>
+			<% end %>
+
+			</li>
+				<li class="nav-item dropdown ml-3 ">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<%= image_tag(current_user.avatar,height: 30, width: 30 ,class: "rounded-circle") if current_user.avatar.present? %>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<%= link_to "Edit Profile" ,edit_user_registration_path(current_user) , class:'dropdown-item'%>
+						<%= link_to "Sign out", destroy_user_session_path, :method => :delete , class:'dropdown-item'%>
+					</div>
+      </li>
+ 			<% end %>
+			<li class="nav-item pt-1">
+				<%= link_to "About Us" ,home_path(1) , class:'nav-link'%>
+			</li>
+		</ul>
+	</div>
+</nav>
