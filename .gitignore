@@ -32,3 +32,6 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Cloudinary credentials come from CLOUDINARY_URL
+/config/cloudinary.yml
